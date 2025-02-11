@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Interface</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body 
+        {
+            background-color: #f8f9fa;
+        }
+        .chat-container 
+        {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+        .chat-box
+        { 
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 10px; 
+        }
+        .user-message, .ai-message
+        {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 5px 0;
+            width: fit-content;
+            max-width: 80%; 
+        }
+        .user-message
+        {
+            background-color: #c4c92f;
+            color: white;
+            align-self: flex-end;
+        }
+        .ai-message
+        {background-color: #27b938;
+            color: black;
+            align-self: flex-start; 
+        }
+        .chat-box div 
+        {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="chat-container">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-white text-center">AI Chat</div>
+            <div class="chat-box d-flex flex-column p-3" id="chatBox"></div>
+            <div class="card-footer d-flex">
+                <input type="text" id="userInput" class="form-control me-2" placeholder="Type a message...">
+                <button class="btn btn-outline-warning" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        let inputField = document.getElementById("userInput");
+        let message = inputField.value.trim();
+        if (message === "") return;
+
+        let chatBox = document.getElementById("chatBox");
+        
+        
+        let userDiv = document.createElement("div");
+        userDiv.className = "user-message";
+        userDiv.textContent = message;
+        chatBox.appendChild(userDiv);
+        
+        inputField.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+      
+        setTimeout(() => {
+            let aiDiv = document.createElement("div");
+            aiDiv.className = "ai-message";
+            aiDiv.textContent = "I'm here to help! What do you need?";
+            chatBox.appendChild(aiDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
